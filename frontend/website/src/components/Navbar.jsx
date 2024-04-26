@@ -8,8 +8,10 @@ import React from "react";
 const Navbar = () => {
     const { data: session, status } = useSession();
     return (
-        <div className="z-10 flex flex-row items-center justify-between w-full h-16 font-mono text-sm lg:flex border-b-[0.5px] border-zinc-800">
-            <span className="mx-6 text-3xl font-semibold">ConSigner</span>
+        <div className="z-50 flex flex-row items-center justify-between w-full h-16 font-mono text-sm lg:flex border-b-[0.5px] border-zinc-800 fixed bg-slate-600">
+            <Link href={"/"}>
+                <span className="mx-6 text-3xl font-semibold ">ConSigner</span>
+            </Link>
             {session ? (
                 <div className="flex flex-row items-center gap-4 mx-6 text-xl md:gap-6">
                     <Link
@@ -25,16 +27,16 @@ const Navbar = () => {
                         Delivery
                     </Link>
                     <Link
-                        href={"/"}
+                        href={"/products"}
                         className="duration-300 hover:text-blue-800"
                     >
-                        Home
+                        My Products
                     </Link>
                     <Link
-                        href={"/"}
+                        href={"/arrange"}
                         className="duration-300 hover:text-blue-800"
                     >
-                        Home
+                        Arrange
                     </Link>
 
                     <div
