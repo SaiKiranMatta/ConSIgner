@@ -9,23 +9,25 @@ function App() {
     const [height, setHeight] = useState("");
     const [weight, setWeight] = useState("");
     const [quantity, setQuantity] = useState(1);
+    const [totalBoxesCount, setTotalBoxesCount] = useState(0);
 
     const handleAddBox = () => {
         const newBox = {
             length: parseFloat(length),
             width: parseFloat(width),
             height: parseFloat(height),
-            weight: parseFloat(weight),
+            weight: parseFloat(weight), // Include weight in the new box object
         };
         const newBoxes = [...boxes];
         for (let i = 0; i < quantity; i++) {
             newBoxes.push(newBox);
         }
         setBoxes(newBoxes);
+        setTotalBoxesCount(newBoxes.length); // Update total boxes count
     };
 
     return (
-        <div className="flex flex-col items-center w-full h-screen pt-16 bg-slate-300">
+        <div className="flex flex-col items-center flex-1 w-full pt-16 bg-slate-300">
             <h1 className="my-6 text-3xl text-black ">Add Boxes</h1>
             <div className="flex flex-row gap-2 text-black">
                 <div className="flex flex-col px-2 py-2 border">
@@ -80,11 +82,23 @@ function App() {
                     Add Box
                 </button>
             </div>
-            <div></div>
-            <h2 className="my-6 text-3xl text-black ">Added Boxes:</h2>
+            <div className="w-full h-1 my-4 bg-slate-400"></div>
+            <div className="flex flex-row items-center gap-2">
+                <h2 className="my-6 text-3xl text-black">Added Boxes:</h2>
+                <div
+                    className="px-4 py-2 text-white bg-blue-600 rounded-md"
+                    onClick={handleAddBox}
+                >
+                    Generate Arrangements
+                </div>
+            </div>
+
             <ul>
                 {boxes.map((box, index) => (
-                    <li key={index}>
+                    <li
+                        className="w-full px-4 py-4 text-black border-[0.5px] my-4 rounded-2xl border-slate-500"
+                        key={index}
+                    >
                         {`Box ${index + 1}: Length - ${box.length}, Width - ${
                             box.width
                         }, Height - ${box.height}, Weight - ${box.weight}`}

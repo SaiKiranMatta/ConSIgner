@@ -60,8 +60,7 @@ async def solve_routing_problem_endpoint(orders: Order):
 
 
 @app.post("/package-optimize")
-def package_optimize():
-    runMCTS()
+def package_optimize(data):
+    runMCTS(data.boxes, data.boxes_cbm, data.noofboxes)
 
 
-package_optimize()

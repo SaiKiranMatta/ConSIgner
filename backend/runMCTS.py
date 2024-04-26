@@ -5,19 +5,20 @@ import helper
 
 
 class runMCTS():
-    def __init__(self):
+    def __init__(self, boxesJSON, boxes_cbmJSON, noofboxes):
         CONTAINER_DIMENSIONS = {"length": 300, "width": 150, "height": 150}
         container_cbm = CONTAINER_DIMENSIONS["length"] * \
             CONTAINER_DIMENSIONS["width"] * CONTAINER_DIMENSIONS["height"]
         container_cbm /= 1000000
-        NUMBER_OF_BOXES = 50
+        NUMBER_OF_BOXES = noofboxes
         MIN_EDGE_SIZE = 20
         MAX_EDGE_SIZE = 60
         SPACE_SCALING_FACTOR = 10
         boxes, boxes_cbm = helper.simulateBoxData(
             NUMBER_OF_BOXES, MIN_EDGE_SIZE, MAX_EDGE_SIZE, 1, True)
         # boxes, boxes_cbm = helper.loadBoxData()
-        boxes, boxes_cbm = helper.loadBoxData("Exp-20240426-183128")
+        # boxes, boxes_cbm = helper.loadBoxData("Exp-20240426-183128")
+        boxes, boxes_cbm = boxesJSON, boxes_cbmJSON
         container = Container(length=CONTAINER_DIMENSIONS["length"], width=CONTAINER_DIMENSIONS["width"],
                               height=CONTAINER_DIMENSIONS["height"], boxes=boxes, spaceOptimizationFactor=SPACE_SCALING_FACTOR, useDeepSearch=False)
         noMCTS_seq_container = copy.deepcopy(container)

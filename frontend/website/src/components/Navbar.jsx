@@ -8,40 +8,40 @@ import React from "react";
 const Navbar = () => {
     const { data: session, status } = useSession();
     return (
-        <div className="z-50 flex flex-row items-center justify-between w-full h-16 font-mono text-sm lg:flex border-b-[0.5px] border-zinc-800 fixed bg-slate-600">
+        <div className="z-50 flex flex-row  items-center justify-between w-full h-16  text-sm lg:flex border-b-[0.5px] border-zinc-800 fixed bg-[#020617]">
             <Link href={"/"}>
-                <span className="mx-6 text-3xl font-semibold ">ConSigner</span>
+                <span className="mx-6 text-3xl font-medium ">ConSigner</span>
             </Link>
             {session ? (
                 <div className="flex flex-row items-center gap-4 mx-6 text-xl md:gap-6">
                     <Link
                         href={"/"}
-                        className="duration-300 hover:text-blue-800"
+                        className="duration-300 hover:text-[#22D3EE]"
                     >
                         Home
                     </Link>
                     <Link
                         href={"/delivery"}
-                        className="duration-300 hover:text-blue-800"
+                        className="duration-300 hover:text-[#22D3EE]"
                     >
                         Delivery
                     </Link>
                     <Link
                         href={"/products"}
-                        className="duration-300 hover:text-blue-800"
+                        className="duration-300 hover:text-[#22D3EE]"
                     >
                         My Products
                     </Link>
                     <Link
                         href={"/arrange"}
-                        className="duration-300 hover:text-blue-800"
+                        className="duration-300 hover:text-[#22D3EE]"
                     >
                         Arrange
                     </Link>
 
                     <div
                         onClick={signOut}
-                        className="px-4 py-2 mr-6 duration-300 bg-blue-800 border border-blue-800 rounded-xl hover:text-blue-800 hover:bg-transparent"
+                        className="px-4 py-2 mr-6 duration-300 bg-blue-800 border border-blue-800 rounded-xl hover:text-[#22D3EE] hover:bg-transparent"
                     >
                         Logout
                     </div>
@@ -50,7 +50,7 @@ const Navbar = () => {
                 <div>
                     <Link
                         href={"/login"}
-                        className="px-4 py-2 mr-6 duration-300 bg-blue-800 rounded-xl hover:text-blue-800"
+                        className="px-4 py-2 mr-6 duration-300 bg-blue-800 rounded-xl hover:text-[#22D3EE]"
                     >
                         Login
                     </Link>
