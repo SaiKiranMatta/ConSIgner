@@ -24,6 +24,15 @@ class Order(BaseModel):
     capacities: List[int]
     vehicles: int
 
+class Box(BaseModel):
+    length: float
+    width: float
+    height: float
+
+class Payload(BaseModel):
+    boxesJSON: List[Box]
+    boxCBM: float
+    noOfBoxes: int
 
 @app.get("/")
 def root():
@@ -60,7 +69,11 @@ async def solve_routing_problem_endpoint(orders: Order):
 
 
 @app.post("/package-optimize")
-def package_optimize(data):
-    runMCTS(data.boxes, data.boxes_cbm, data.noofboxes)
+async def package_optimize(data: Payload):
+    
+    boxes_data = [{"length": box.length, "width": box.width, "height": box.height} for box in data.boxesJSON]
+    # print(boxes_data)
+    # runMCTS(data.boxesJSON, data.boxCBM, data.noOfBoxes)
+    runMCTS(boxes_data, data.boxCBM, data.noOfBoxes)
 
 

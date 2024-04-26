@@ -19,6 +19,7 @@ class runMCTS():
         # boxes, boxes_cbm = helper.loadBoxData()
         # boxes, boxes_cbm = helper.loadBoxData("Exp-20240426-183128")
         boxes, boxes_cbm = boxesJSON, boxes_cbmJSON
+        print(boxes)
         container = Container(length=CONTAINER_DIMENSIONS["length"], width=CONTAINER_DIMENSIONS["width"],
                               height=CONTAINER_DIMENSIONS["height"], boxes=boxes, spaceOptimizationFactor=SPACE_SCALING_FACTOR, useDeepSearch=False)
         noMCTS_seq_container = copy.deepcopy(container)

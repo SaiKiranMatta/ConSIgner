@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import axios from "axios";
 
 function App() {
     const [boxes, setBoxes] = useState([]);
@@ -16,7 +17,7 @@ function App() {
             length: parseFloat(length),
             width: parseFloat(width),
             height: parseFloat(height),
-            weight: parseFloat(weight), // Include weight in the new box object
+            // weight: parseFloat(weight), // Include weight in the new box object
         };
         const newBoxes = [...boxes];
         for (let i = 0; i < quantity; i++) {
@@ -24,6 +25,44 @@ function App() {
         }
         setBoxes(newBoxes);
         setTotalBoxesCount(newBoxes.length); // Update total boxes count
+    };
+
+    const sendDataToBackend = async () => {
+        const url = process.env.NEXT_PUBLIC_Backend_address;
+        // Create a payload object containing the required data
+        const payload = {
+            boxesJSON: boxes,
+            boxCBM: calculateBoxCBM(boxes),
+            noOfBoxes: totalBoxesCount,
+        };
+
+        console.log(payload);
+
+        try {
+            const response = await fetch(`${url}/package-optimize`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+            console.log("Sending data to backend...");
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const responseData = await response.json();
+            console.log("Data sent successfully:", responseData);
+        } catch (error) {
+            console.error("Error sending data:", error);
+        }
+    };
+
+    // Function to calculate the total CBM (Cubic Meter) of all boxes
+    const calculateBoxCBM = (boxes) => {
+        return boxes.reduce((acc, box) => {
+            return acc + (box.length * box.width * box.height) / 1000000; // Convert to cubic meters
+        }, 0);
     };
 
     return (
@@ -86,8 +125,8 @@ function App() {
             <div className="flex flex-row items-center gap-2">
                 <h2 className="my-6 text-3xl text-black">Added Boxes:</h2>
                 <div
-                    className="px-4 py-2 text-white bg-blue-600 rounded-md"
-                    onClick={handleAddBox}
+                    className="px-4 py-2 text-white bg-blue-600 rounded-md cursor-pointer"
+                    onClick={sendDataToBackend}
                 >
                     Generate Arrangements
                 </div>
