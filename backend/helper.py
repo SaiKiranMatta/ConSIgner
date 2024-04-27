@@ -83,7 +83,7 @@ def renderContainerData(containerData, renderer="browser"):
 
     fig['layout'].update(
         scene=dict(camera=camera),
-        title="XY Plane"
+        title="ConSigner"
     )
 
     fig.show()

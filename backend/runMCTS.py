@@ -5,8 +5,8 @@ import helper
 
 
 class runMCTS():
-    def __init__(self, boxesJSON, boxes_cbmJSON, noofboxes):
-        CONTAINER_DIMENSIONS = {"length": 300, "width": 150, "height": 150}
+    def __init__(self, boxesJSON, boxes_cbmJSON, noofboxes, containerDimensions):
+        CONTAINER_DIMENSIONS = containerDimensions
         container_cbm = CONTAINER_DIMENSIONS["length"] * \
             CONTAINER_DIMENSIONS["width"] * CONTAINER_DIMENSIONS["height"]
         container_cbm /= 1000000

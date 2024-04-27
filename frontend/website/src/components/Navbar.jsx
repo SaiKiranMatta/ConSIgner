@@ -41,7 +41,7 @@ const Navbar = () => {
 
                     <div
                         onClick={signOut}
-                        className="px-4 py-2 mr-6 duration-300 bg-blue-800 border border-blue-800 rounded-xl hover:text-[#22D3EE] hover:bg-transparent"
+                        className="px-4 py-2 mr-6 duration-300  text-[#22D3EE] border border-[#22D3EE] rounded-xl hover:bg-[#22D3EE] hover:text-white hover:bg-transparent"
                     >
                         Logout
                     </div>
@@ -50,7 +50,7 @@ const Navbar = () => {
                 <div>
                     <Link
                         href={"/login"}
-                        className="px-4 py-2 mr-6 duration-300 bg-blue-800 rounded-xl hover:text-[#22D3EE]"
+                        className="px-4 py-2 mr-6 duration-300 bg-[#22D3EE] rounded-xl hover:text-[#22D3EE]"
                     >
                         Login
                     </Link>

@@ -11,6 +11,9 @@ function App() {
     const [weight, setWeight] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [totalBoxesCount, setTotalBoxesCount] = useState(0);
+    const [containerLength, setContainerLength] = useState("");
+    const [containerWidth, setContainerWidth] = useState("");
+    const [containerHeight, setContainerHeight] = useState("");
 
     const handleAddBox = () => {
         const newBox = {
@@ -34,25 +37,22 @@ function App() {
             boxesJSON: boxes,
             boxCBM: calculateBoxCBM(boxes),
             noOfBoxes: totalBoxesCount,
+            containerDimensions: {
+                length: parseFloat(containerLength),
+                width: parseFloat(containerWidth),
+                height: parseFloat(containerHeight),
+            },
         };
 
         console.log(payload);
 
         try {
-            const response = await fetch(`${url}/package-optimize`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(payload),
-            });
+            const response = await axios.post(
+                `${url}/package-optimize`,
+                payload
+            );
             console.log("Sending data to backend...");
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const responseData = await response.json();
-            console.log("Data sent successfully:", responseData);
+            console.log("Data sent successfully:", response.data);
         } catch (error) {
             console.error("Error sending data:", error);
         }
@@ -131,7 +131,35 @@ function App() {
                     Generate Arrangements
                 </div>
             </div>
-
+            <div className="flex flex-row gap-2 text-black">
+                <div className="flex flex-col px-2 py-2 border">
+                    <label>Container Length:</label>
+                    <input
+                        className="w-24 mt-2 rounded-md"
+                        type="number"
+                        value={containerLength}
+                        onChange={(e) => setContainerLength(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col px-2 py-2 border">
+                    <label>Container Width:</label>
+                    <input
+                        className="w-24 mt-2 rounded-md"
+                        type="number"
+                        value={containerWidth}
+                        onChange={(e) => setContainerWidth(e.target.value)}
+                    />
+                </div>
+                <div className="flex flex-col px-2 py-2 border">
+                    <label>Container Height:</label>
+                    <input
+                        className="w-24 mt-2 rounded-md"
+                        type="number"
+                        value={containerHeight}
+                        onChange={(e) => setContainerHeight(e.target.value)}
+                    />
+                </div>
+            </div>
             <ul>
                 {boxes.map((box, index) => (
                     <li
